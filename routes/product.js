@@ -21,4 +21,42 @@ router.get('/:id', (req, res) => {
     .catch(err => { res.status(500).send({ message: err.message }); });
 });
 
+router.put('/:id', (req, res) => {
+  const data = req.body;
+
+  product.findByIdAndUpdate(req.params.id, data)
+    .then(result => {
+      if (!result) {
+        res.status(404).send({
+          message: 'Cannot update the product with id: ' + id + '.'
+        });
+      } else {
+        res.send({ message: 'Product was successfully updated.' })
+      }
+      res.send(result);
+    }).catch(err => {
+      res.status(500).send({
+        message: 'Error updating the product'
+      });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  product.findByIdAndDelete(req.params.id)
+    .then(result => {
+      if (!result) {
+        res.status(404).send({
+          message: 'Cannot delete the product with id: ' + id + '.'
+        });
+      } else {
+        res.send({ message: 'Product was successfully deleted.' })
+      }
+      res.send(result);
+    }).catch(err => {
+      res.status(500).send({
+        message: 'Error deleting the product'
+      });
+    });
+});
+
 module.exports = router;
