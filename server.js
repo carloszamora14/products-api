@@ -7,8 +7,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-mongoose.connect(process.env.MONGOURI)
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(process.env.MONGOURI).catch(err => {
+  console.error('MongoDB connection error:', err)
+});
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
