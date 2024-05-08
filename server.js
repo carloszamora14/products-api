@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv-flow').config();
 
-const productRoutes = require('routes/product');
+const productRoutes = require('./routes/product');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
