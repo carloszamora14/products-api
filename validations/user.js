@@ -7,8 +7,8 @@ const authSignup = Joi.object({
 });
 
 const authLogin = Joi.object({
-  email: Joi.string().required(),
-  password: Joi.string().required(),
+  email: Joi.string().min(6).max(255).email().required(),
+  password: Joi.string().min(8).max(255).required(),
 });
 
 module.exports = { authSignup, authLogin };
