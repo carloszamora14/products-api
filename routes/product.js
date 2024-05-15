@@ -18,7 +18,7 @@ router.post('/', verifyToken, (req, res) => {
   const data = req.body;
 
   product.insertMany(data)
-    .then(result => { res.send(result); })
+    .then(result => { res.status(201).send(result); })
     .catch(err => { res.status(500).send({ message: err.message }); });
 });
 

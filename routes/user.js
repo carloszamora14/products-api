@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
 
   try {
     const { _id: userId } = await newUser.save();
-    return res.status(200).json({ error: null, data: userId });
+    return res.status(201).json({ error: null, data: userId });
   } catch (err) {
     return res.status(500).json({ error: 'There was an error' });
   }
