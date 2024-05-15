@@ -14,8 +14,8 @@ app.use(express.json());
 
 const swaggerDefinition = yaml.load('./swagger.yaml');
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
-app.use('/api/user', userRoutes);
-app.use('/api/product', productRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 mongoose.connect(process.env.MONGO_URI).catch(err => {
   console.error('MongoDB connection error:', err)

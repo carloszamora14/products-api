@@ -16,7 +16,7 @@ function verifyToken(req, res, next) {
   const authHeader = req.header('Authorization');
 
   if (!authHeader) {
-    res.status(401).json({ error: 'Access denied. Missing Authorization header' });
+    return res.status(401).json({ error: 'Access denied. Missing Authorization header' });
   }
 
   const token = authHeader.split(' ')[1];
@@ -26,7 +26,7 @@ function verifyToken(req, res, next) {
     req.user = verified;
     next();
   } catch (err) {
-    res.status(400).json({ error: 'Invalid token' });
+    return res.status(400).json({ error: 'Invalid token' });
   }
 }
 
