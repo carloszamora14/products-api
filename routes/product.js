@@ -1,13 +1,6 @@
 const router = require('express').Router();
 const product = require('../models/product');
-
-router.post('/', (req, res) => {
-  const data = req.body;
-
-  product.insertMany(data)
-    .then(result => { res.send(result); })
-    .catch(err => { res.status(500).send({ message: err.message }); });
-});
+const { verifyToken } = require('../validations/user');
 
 router.get('/', (req, res) => {
   product.find()
@@ -21,7 +14,15 @@ router.get('/:id', (req, res) => {
     .catch(err => { res.status(500).send({ message: err.message }); });
 });
 
-router.put('/:id', (req, res) => {
+router.post('/', verifyToken, (req, res) => {
+  const data = req.body;
+
+  product.insertMany(data)
+    .then(result => { res.send(result); })
+    .catch(err => { res.status(500).send({ message: err.message }); });
+});
+
+router.put('/:id', verifyToken, (req, res) => {
   const data = req.body;
 
   product.findByIdAndUpdate(req.params.id, data)
@@ -41,7 +42,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
   product.findByIdAndDelete(req.params.id)
     .then(result => {
       if (!result) {

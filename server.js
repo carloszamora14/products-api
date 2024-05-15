@@ -12,7 +12,7 @@ app.use(express.json());
 app.use('/api/user', userRoutes);
 app.use('/api/product', productRoutes);
 
-mongoose.connect(process.env.MONGOURI).catch(err => {
+mongoose.connect(process.env.MONGO_URI).catch(err => {
   console.error('MongoDB connection error:', err)
 });
 mongoose.connection.once('open', () => {
